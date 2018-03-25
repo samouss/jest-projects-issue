@@ -1,18 +1,31 @@
-## Jest projects
+See [#5866](https://github.com/facebook/jest/issues/5866)
 
-See [#XXX]()
+### From the configuration file (not working)
 
 ```sh
-cd single-project && yarn && yarn test --listTests
+yarn && yarn test --listTests
 
-.../jest-projects-issue/single-project/packages/package-a/index.spec.js
-.../jest-projects-issue/single-project/examples/example-a/index.spec.js # Should not be listed
+jest-projects-issue/packages/package-a/index.spec.js
+jest-projects-issue/examples/example-a/index.spec.js # SHOULD NOT BE RUN
 ```
 
-```sh
-cd single-project && yarn && yarn test --listTests --projects packages/*
+```json
+{
+  "jest": {
+    "projects": [
+      "packages/*"
+    ]
+  }
+}
+```
 
-.../jest-projects-issue/single-project/packages/package-a/index.spec.js
+
+### From the CLI (working)
+
+```sh
+yarn && yarn test --listTests --projects packages/*
+
+jest-projects-issue/packages/package-a/index.spec.js
 ```
 
 ```json
